@@ -15,7 +15,12 @@ class Counters extends Component {
     return(
       <div>
         {/* Map is used to insert the counters for each product into the page. data is passed in through object keys */}
-        { this.state.counters.map(counter => <Counter key={counter.id} value={counter.value} product={counter.product} id={counter.id}/>) }
+        { this.state.counters.map(counter => (
+          <Counter key={counter.id} value={counter.value} product={counter.product} id={counter.id}>
+            {/* Additional code can be placed within the Counter tags and be passed to the children via props.children  */}
+            <h4>Amount of {counter.product} in your cart</h4>
+          </Counter>
+        ))}
       </div>
     )
   }

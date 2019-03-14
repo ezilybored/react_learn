@@ -25,9 +25,12 @@ class Counter extends Component {
   render() {
     // Logs the properties of each instance of this counter object
     console.log('props', this.props)
+
     return (
       // Use React.Fragment in place of <div> as <div> ends up doing some strange double <div> thing
       <React.Fragment>
+        {/* Accesses any data passed to the children, from the parent, via this.props.children */}
+        { this.props.children }
         { /* className used instead of class. Using bootstrap classes here */ }
         <span style={ this.styles } className={this.getBadgeClasses()}>{this.formatCount()}</span>
         { /* Adding onClick event. Note when implementing the method without parameters skip the () at the end */}
