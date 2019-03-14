@@ -5,7 +5,6 @@ class Counter extends Component {
   state = {
     // State is used to store data
     count: 0,
-    tags: ['tag1', 'tag2', 'tag3']
   }
   // 3 ways of CSS styling. Inline, as an object, or as a separate file
   styles = {
@@ -13,13 +12,25 @@ class Counter extends Component {
     fontWeight: 'bold'
   }
 
-  // Conditionally rendering tags to the lis
-  renderTags() {
-    if (this.state.tags.length === 0) return <p>There are no elements in this list</p>
-    // If there are tags then use the render method that was previously in the jsx
-    // Each item in the list needs a unique key. Here it is given by the string as in each item the text is different.
-    // It could be the id field from an object
-    return <ul>{ this.state.tags.map(tag => <li key={tag}>{tag}</li>) }</ul>
+  // Create a class to be able to bind the keyword this to the Counter object
+  /*
+  constructor() {
+    super()
+    this.handleIncrement = this.handleIncrement.bind(this)
+  }
+
+  // Event handler
+  handleIncrement() {
+    console.log('Increment Clicked', this)
+  }
+  */
+
+  // Alternative method for binding keyword this to the counter object
+  // Use an arrow function as these inherit the binding of this from parents
+  // Event handler
+  handleIncrement = () => {
+    // The state of the component is changed indirectly using setState
+    this.setState({ count: this.state.count + 1 })
   }
 
   render() {
@@ -29,12 +40,8 @@ class Counter extends Component {
       <React.Fragment>
         { /* className used instead of class. Using bootstrap classes here */ }
         <span style={ this.styles } className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <button style={{ fontSize: 20, fontWeight: 'bold' }} className="btn btn-secondary btn-sm">Increment</button>
-        { /* { this.state.tags.map(tag => <li key={tag}>{tag}</li>) } is used to render a list from an array defined in the state object*/ }
-        <ul>
-          { this.renderTags() }
-        </ul>
-
+        { /* Adding onClick event. Note when implementing the method skip the () at the end */}
+        <button style={{ fontSize: 20, fontWeight: 'bold' }} onClick={this.handleIncrement} className="btn btn-secondary btn-sm">Increment</button>
       </React.Fragment>
     )
   }
