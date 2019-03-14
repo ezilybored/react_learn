@@ -28,7 +28,9 @@ class Counter extends Component {
   // Alternative method for binding keyword this to the counter object
   // Use an arrow function as these inherit the binding of this from parents
   // Event handler
-  handleIncrement = () => {
+  // Add in an argument called product. Thsi could be from an object containing a list of products
+  handleIncrement = product => {
+    console.log(product)
     // The state of the component is changed indirectly using setState
     this.setState({ count: this.state.count + 1 })
   }
@@ -40,8 +42,9 @@ class Counter extends Component {
       <React.Fragment>
         { /* className used instead of class. Using bootstrap classes here */ }
         <span style={ this.styles } className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        { /* Adding onClick event. Note when implementing the method skip the () at the end */}
-        <button style={{ fontSize: 20, fontWeight: 'bold' }} onClick={this.handleIncrement} className="btn btn-secondary btn-sm">Increment</button>
+        { /* Adding onClick event. Note when implementing the method without parameters skip the () at the end */}
+        { /* When passing a parameter in write an inline function to handle this with the arguments passed in here */}
+        <button style={{ fontSize: 20, fontWeight: 'bold' }} onClick={ () => this.handleIncrement({ id: 1 }) } className="btn btn-secondary btn-sm">Increment</button>
       </React.Fragment>
     )
   }
