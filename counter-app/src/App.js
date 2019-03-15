@@ -25,10 +25,13 @@ class App extends Component {
       const counters = this.state.counters.filter(c => c.id !== counterId)
       // Sets the value of counters in the state object with the value in the counters constant just set
       this.setState({ counters: counters })
+
+      const total = 0
+      this.setState({ total: total })
     }
 
     // Resets all values to 0 when the reset button is pressed
-    handleReset = () => {
+    handleReset = counter => {
 
       const counters = this.state.counters.map(c => {
         c.value = 0
@@ -36,6 +39,10 @@ class App extends Component {
       })
       this.setState({ counters: counters })
 
+      const countersreset = [...this.state.counters]
+      // Find the index of the counter passed in by the child on the event click
+      const index = countersreset.indexOf(counter)
+      countersreset[index] = {...counter}
       const total = 0
       this.setState({ total: total })
     }

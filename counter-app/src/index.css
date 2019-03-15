@@ -15,10 +15,37 @@ code {
 
 .counters {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-row-gap: 5px;
 }
 
 .mainbox {
   margin-top: 10px;
+}
+
+.titles {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-row-gap: 5px;
+}
+
+.total {
+  grid-column: 1 / 2;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.item {
+  grid-column: 2 / 3;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.price {
+  grid-column: 3 / 4;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
 }

@@ -22,17 +22,21 @@ class Counter extends Component {
         <button
           style={{ fontSize: 20, fontWeight: 'bold' }}
           onClick={ () => this.props.onIncrement(this.props.counter) }
-          className="btn btn-secondary btn-sm m-2">{ this.props.counter.product }
+          className="btn btn-primary btn-sm m-2">{ this.props.counter.product }
         </button>
+        <span
+          style={ this.styles }
+          className="btn btn-info btn-sm m-2">$ { this.props.counter.cost }
+        </span>
         <button
           style={{ fontSize: 20, fontWeight: 'bold' }}
           onClick={ () => this.props.onRemoveOne(this.props.counter) }
-          className="btn btn-secondary btn-sm m-2">Remove Item
+          className="btn btn-primary btn-sm m-2">Remove Item
         </button>
         <button
           style={{ fontSize: 20, fontWeight: 'bold' }}
           onClick={ () => this.props.onClear(this.props.counter) }
-          className="btn btn-danger btn-sm m-2">Clear
+          className="btn btn-warning btn-sm m-2">Clear
         </button>
         {/* onClick={ () => this.props.onDelete(this.props.id) } this passes the ID of the product to remove back to the parent when the call is made */}
         <button
@@ -48,7 +52,7 @@ class Counter extends Component {
   getBadgeClasses() {
     let classes = "badge m-2 badge-"
     // Appends either warning or primary to the end of classes depending on its value === 0 or not
-    classes += (this.props.counter.value === 0) ? "warning" : "primary"
+    classes += (this.props.counter.value === 0) ? "secondary" : "default"
     return classes
   }
 
