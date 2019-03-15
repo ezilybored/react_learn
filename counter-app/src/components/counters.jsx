@@ -5,10 +5,10 @@ class Counters extends Component {
   state = {
     // An array of counters for each object that stores some infor on each product
     counters: [
-      { id: 1, value: 2, product: 'Bread' },
-      { id: 2, value: 3, product: 'Jam' },
-      { id: 3, value: 1, product: 'Spoons'},
-      { id: 4, value: 9000, product: 'Freight train' },
+      { id: 1, value: 0, cost: 2, product: 'Bread' },
+      { id: 2, value: 0, cost: 1, product: 'Jam' },
+      { id: 3, value: 0, cost: 3, product: 'Spoons'},
+      { id: 4, value: 0, cost: 9000, product: 'Freight train' },
     ]
   }
 
@@ -24,11 +24,55 @@ class Counters extends Component {
   // Resets all values to 0 when the reset button is pressed
   handleReset = () => {
     console.log('reset button pressed')
+    /*
+    const counters = this.state.counters
+    console.log(counters)
+    this.setState({ counters: counters })
+    */
+
     const counters = this.state.counters.map(c => {
       c.value = 0
       return c
     })
     this.setState({ counters: counters })
+    
+
+  }
+
+  // Event handlers
+  // Add in an argument called product. Thsi could be from an object containing a list of products
+  handleIncrement = counter => {
+    // The state of the component is changed indirectly using setState
+    // Use spread operator to clone the counters array
+    const counters = [...this.state.counters]
+    // Find the index of the counter passed in by the child on the event click
+    const index = counters.indexOf(counter)
+    counters[index] = {...counter}
+    counters[index].value = counters[index].value + counters[index].cost
+    this.setState({ counters: counters })
+  }
+
+  // An event to handle the emptying of a purchase amount
+  handleClear = counter => {
+    const counters = [...this.state.counters]
+    // Find the index of the counter passed in by the child on the event click
+    const index = counters.indexOf(counter)
+    counters[index] = {...counter}
+    counters[index].value = 0
+    this.setState({ counters: counters })
+
+  }
+
+  // An event to handle the removal of a single item
+  handleRemoveOne= counter => {
+    const counters = [...this.state.counters]
+    // Find the index of the counter passed in by the child on the event click
+    const index = counters.indexOf(counter)
+    counters[index] = {...counter}
+    if (counters[index].value > 0){
+      counters[index].value = counters[index].value - counters[index].cost
+      this.setState({ counters: counters })
+    }
   }
 
 
@@ -46,6 +90,9 @@ class Counters extends Component {
           {/* The whole counter object can be passed using counter={counter} */}
           { this.state.counters.map(counter => (<Counter  key={counter.id}
                                                           onDelete={this.handleDelete}
+                                                          onIncrement={this.handleIncrement}
+                                                          onClear={this.handleClear}
+                                                          onRemoveOne={this.handleRemoveOne}
                                                           counter={counter}
                                                           />))}
         </div>
