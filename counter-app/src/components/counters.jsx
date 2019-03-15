@@ -6,6 +6,10 @@ class Counters extends Component {
   // All state control and asscociated  fucntions moved to app.js
 
   render() {
+    // Destructuring this.props. When passing properties to counter no longer need this.props
+    // E.g. onDelete={this.props.onDelete} is now onDelete={onDelete}
+    const { onDelete, onIncrement, onClear, onRemoveOne, counter } = this.props
+
     return(
       <div className="mainbox">
         <div className="titles">
@@ -19,10 +23,10 @@ class Counters extends Component {
           {/* The whole counter object can be passed using counter={counter} */}
           {/* This process now bubbles up the event from the child to the parent */}
           { this.props.counters.map(counter => (<Counter  key={counter.id}
-                                                          onDelete={this.props.onDelete}
-                                                          onIncrement={this.props.onIncrement}
-                                                          onClear={this.props.onClear}
-                                                          onRemoveOne={this.props.onRemoveOne}
+                                                          onDelete={onDelete}
+                                                          onIncrement={onIncrement}
+                                                          onClear={onClear}
+                                                          onRemoveOne={onRemoveOne}
                                                           counter={counter}
                                                           />))}
         </div>
