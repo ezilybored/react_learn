@@ -18,6 +18,23 @@ class App extends Component {
       total: 0
     }
 
+    // Lifecycle Hooks (Mounting)
+    // Constructor is called once when a component is initialised.
+    // In app it is a good place to initialise the state using props passed in as arguments
+    constructor(props) {
+      super()
+      console.log('App - constructor', props)
+      // this.state = this.props.something...
+      // Make sure to use this.state not setState()
+    }
+    // componentDidMount() Called after the component is rendered into the DOM
+    componentDidMount() {
+      // Good for making AJAX calls
+      // E.g. this.setState({ New data from server})
+    }
+    // The render method is the third lifecycle hook related to mounting.
+    // This has been used extensively all ready
+
     // counterID sets the product to delete from the list
     handleDelete = (counterId) => {
       console.log('Event Handler Called on ', counterId)
