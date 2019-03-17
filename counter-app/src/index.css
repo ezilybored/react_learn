@@ -6,6 +6,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {
@@ -18,6 +19,9 @@ code {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-row-gap: 5px;
+  border: solid darkgrey 1px;
+  border-radius: 5px;
+  box-shadow: 2px 2px lightgrey;
 }
 
 .mainbox {
