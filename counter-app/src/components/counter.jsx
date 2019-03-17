@@ -12,6 +12,12 @@ class Counter extends Component {
     }
   }
 
+  // Called before a component is removed from the DOM
+  // E.g. when a counter component is deleted using the delete button
+  componentWillUnmount() {
+
+  }
+
   state = {};
   // 3 ways of CSS styling. Inline, as an object, or as a separate file
   styles = {
