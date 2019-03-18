@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import Like from "./common/like";
+import Pagination from "./common/pagination";
 
 class Movies extends Component {
   state = {
@@ -8,9 +10,18 @@ class Movies extends Component {
   };
 
   handleDelete = movie => {
-    console.log(movie);
-    const movies = this.state.movies.filter(c => c._id !== movie._id);
+    const movies = movies.filter(c => c._id !== movie._id);
     this.setState({ movies: movies });
+  };
+
+  handleLike = movie => {
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+    movies[index] = { ...movies[index] };
+    movies[index].liked = !movies[index].liked;
+    this.setState({ movies: movies });
+
+    // Also need to set the values in the server. This does not so far
   };
 
   render() {
@@ -36,6 +47,7 @@ class Movies extends Component {
               <th>Stock</th>
               <th>Rate</th>
               <th />
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -45,6 +57,12 @@ class Movies extends Component {
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
+                <td>
+                  <Like
+                    liked={movie.liked}
+                    onClick={() => this.handleLike(movie)}
+                  />
+                </td>
                 <td>
                   {/* An arrow function is used to pass the movie info to the handleDelete function with onClick */}
                   <button
@@ -58,6 +76,7 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
+        <Pagination />
       </React.Fragment>
     );
   }
