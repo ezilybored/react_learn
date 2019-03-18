@@ -14,9 +14,19 @@ class Movies extends Component {
   };
 
   render() {
+    const { length: availableMovies } = this.state.movies;
+    if (availableMovies === 0)
+      return (
+        <React.Fragment>
+          <h2>BlankBuster Movies</h2>
+          <p>There are no movies currently in the database</p>
+        </React.Fragment>
+      );
+
     return (
-      <div>
-        <h2>Movies Component</h2>
+      <React.Fragment>
+        <h2>BlankBuster Movies</h2>
+        <p>Showing {availableMovies} movies currently available for rental</p>
         <table className="table">
           <thead>
             <tr>
@@ -46,7 +56,7 @@ class Movies extends Component {
             ))}
           </tbody>
         </table>
-      </div>
+      </React.Fragment>
     );
   }
 }
