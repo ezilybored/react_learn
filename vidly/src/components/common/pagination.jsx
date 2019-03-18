@@ -35,7 +35,7 @@ const Pagination = props => {
 };
 
 // Uses a separate package to set the type of each of the props. This allows easy catching of type errors
-Pagination.PropTypes = {
+Pagination.propTypes = {
   itemsCount: PropTypes.number.isRequired,
   pageSize: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
