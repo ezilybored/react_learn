@@ -1,21 +1,9 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/fakeMovieService";
 
-class Movies extends Component {
-  state = {
-    // Gets the movie list from fakeMovieServices
-    movies: getMovies()
-  };
-
-  handleDelete = movie => {
-    console.log(movie);
-    const movies = this.state.movies.filter(c => c._id !== movie._id);
-    this.setState({ movies: movies });
-  };
-
+class Movies2 extends Component {
   render() {
     // Sets the length value from this.state.movies as the variable availableMovies
-    const { length: availableMovies } = this.state.movies;
+    const { length: availableMovies } = this.props.movies;
     if (availableMovies === 0)
       return (
         <React.Fragment>
@@ -39,7 +27,7 @@ class Movies extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map(movie => (
+            {this.props.movies.map(movie => (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
@@ -49,7 +37,7 @@ class Movies extends Component {
                   {/* An arrow function is used to pass the movie info to the handleDelete function with onClick */}
                   <button
                     className="btn btn-danger btn-sm m-2"
-                    onClick={() => this.handleDelete(movie)}
+                    onClick={() => this.props.onDelete(movie)}
                   >
                     Delete
                   </button>
@@ -63,4 +51,4 @@ class Movies extends Component {
   }
 }
 
-export default Movies;
+export default Movies2;
