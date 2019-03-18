@@ -7,16 +7,14 @@ class Counter extends Component {
     console.log("prevProps", prevProps);
     console.log("prevState", prevState);
     // Can use this to compare to the current state and make an AJAX server call if there is a change
-    if (prevProps.counter.value !== this props.counter.value) {
+    if (prevProps.counter.value !== this.props.counter.value) {
       // Make AJAX call
     }
   }
 
   // Called before a component is removed from the DOM
   // E.g. when a counter component is deleted using the delete button
-  componentWillUnmount() {
-
-  }
+  componentWillUnmount() {}
 
   state = {};
   // 3 ways of CSS styling. Inline, as an object, or as a separate file
@@ -34,19 +32,20 @@ class Counter extends Component {
         <button
           style={{ fontSize: 20, fontWeight: "bold" }}
           onClick={() => this.props.onIncrement(this.props.counter)}
-          className="btn btn-primary btn-sm m-2"
+          className="btn btn-secondary btn-sm m-2"
         >
-          {this.props.counter.product}
+          +
         </button>
         <span style={this.styles} className="btn btn-info btn-sm m-2">
-          $ {this.props.counter.cost}
+          {this.props.counter.product}: ${this.props.counter.cost}
         </span>
         <button
           style={{ fontSize: 20, fontWeight: "bold" }}
           onClick={() => this.props.onRemoveOne(this.props.counter)}
-          className="btn btn-primary btn-sm m-2"
+          className="btn btn-secondary btn-sm m-2"
+          disabled={this.props.counter.value === 0 ? "disabled" : ""}
         >
-          Remove Item
+          -
         </button>
         <button
           style={{ fontSize: 20, fontWeight: "bold" }}
@@ -71,7 +70,7 @@ class Counter extends Component {
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
     // Appends either warning or primary to the end of classes depending on its value === 0 or not
-    classes += this.props.counter.value === 0 ? "secondary" : "default";
+    classes += this.props.counter.value === 0 ? "primary" : "default";
     return classes;
   }
 

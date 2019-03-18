@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
-import Counter from "./counter"
+import React, { Component } from "react";
+import Counter from "./counter";
 
 class Counters extends Component {
-
   // All state control and asscociated  fucntions moved to app.js
 
   render() {
     // Destructuring this.props. When passing properties to counter no longer need this.props
     // E.g. onDelete={this.props.onDelete} is now onDelete={onDelete}
-    const { onDelete, onIncrement, onClear, onRemoveOne, counter } = this.props
+    const { onDelete, onIncrement, onClear, onRemoveOne, counter } = this.props;
 
-    return(
+    return (
       <div className="mainbox">
         <div className="titles">
           <h1 className="total">Total</h1>
-          <h1 className="item">Item</h1>
+
           <h1 className="price">Price</h1>
         </div>
         <div className="counters">
@@ -22,22 +21,27 @@ class Counters extends Component {
           {/* This is used to pass a reference to the function to the child as a prop */}
           {/* The whole counter object can be passed using counter={counter} */}
           {/* This process now bubbles up the event from the child to the parent */}
-          { this.props.counters.map(counter => (<Counter  key={counter.id}
-                                                          onDelete={onDelete}
-                                                          onIncrement={onIncrement}
-                                                          onClear={onClear}
-                                                          onRemoveOne={onRemoveOne}
-                                                          counter={counter}
-                                                          />))}
+          {this.props.counters.map(counter => (
+            <Counter
+              key={counter.id}
+              onDelete={onDelete}
+              onIncrement={onIncrement}
+              onClear={onClear}
+              onRemoveOne={onRemoveOne}
+              counter={counter}
+            />
+          ))}
         </div>
         <button
-          style={{ fontSize: 20, fontWeight: 'bold' }}
-          onClick={ this.props.onReset }
-          className="btn btn-danger btn-sm m-2">Resest all
+          style={{ fontSize: 20, fontWeight: "bold" }}
+          onClick={this.props.onReset}
+          className="btn btn-danger btn-sm m-2"
+        >
+          Resest all
         </button>
       </div>
-    )
+    );
   }
 }
 
-export default Counters
+export default Counters;
