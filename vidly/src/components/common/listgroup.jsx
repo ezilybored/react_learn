@@ -11,10 +11,8 @@ const ListGroup = props => {
     valueProperty
   } = props;
 
-  console.log(currentItem);
-
   return (
-    <ul className="list-group">
+    <ul className="list-group ">
       {items.map(item => (
         <a
           key={item[valueProperty]}
