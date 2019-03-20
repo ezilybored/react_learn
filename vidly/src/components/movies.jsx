@@ -5,6 +5,7 @@ import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
+import _ from "lodash";
 
 class Movies extends Component {
   state = {
@@ -12,11 +13,13 @@ class Movies extends Component {
     movies: [],
     pageSize: 4,
     currentPage: 1,
-    genres: []
+    genres: [],
+    // Initial sort when the page is loaded
+    sortColumn: { path: "title", order: "asc" }
   };
 
   componentDidMount() {
-    const genres = [{ name: "All Genres" }, ...getGenres()];
+    const genres = [{ _id: "", name: "All Genres" }, ...getGenres()];
     this.setState({ movies: getMovies(), genres: genres });
   }
 
@@ -44,29 +47,18 @@ class Movies extends Component {
     this.setState({ currentGenre: genre, currentPage: 1 });
   };
 
-  render() {
-    // Sets the length value from this.state.movies as the variable availableMovies
-    const { length: availableMovies } = this.state.movies;
-    // Extracts these values from the state using destructuring
+  handleSort = sortColumn => {
+    this.setState({ sortColumn: sortColumn });
+  };
+
+  getPagedData = () => {
     const {
       pageSize,
       currentPage,
       movies: allMovies,
-      genres,
-      currentGenre
+      currentGenre,
+      sortColumn
     } = this.state;
-
-    if (availableMovies === 0)
-      return (
-        <div className="row">
-          <div className="col-2" />
-          <div className="col">
-            <h2>BlankBuster Movies</h2>
-            <p>There are no movies currently in the database</p>
-          </div>
-        </div>
-      );
-
     // Genre filter needs to be applied before the pagination
     // Is only applied if both currentGenre and curremtGenre._id are both truthy
     // Allows the All Genres button to work
@@ -74,12 +66,38 @@ class Movies extends Component {
       currentGenre && currentGenre._id
         ? allMovies.filter(m => m.genre._id === currentGenre._id)
         : allMovies;
-    // Calls the paginate function from the utils folder paginate.js
-    const movies = paginate(filtered, currentPage, pageSize);
+
+    // Sorting comes after filtering but before pagination
+    // Sorting is done using lodash. Takes two arguments: the (input) filtered array and an array of properties (the column to filter on)
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
+    // Calls the paginate function from the utils folder paginate.js.
+    const movies = paginate(sorted, currentPage, pageSize);
+
+    return { totalCount: filtered.length, data: movies };
+  };
+
+  render() {
+    // Sets the length value from this.state.movies as the variable availableMovies
+    const { length: availableMovies } = this.state.movies;
+    // Extracts these values from the state using destructuring
+    const { pageSize, currentPage, genres, sortColumn } = this.state;
+
+    if (availableMovies === 0)
+      return (
+        <div className="row">
+          <div className="col-2" />
+          <div className="col">
+            <h2>LackLustre Movies</h2>
+            <p>There are no movies currently in the database</p>
+          </div>
+        </div>
+      );
+
+    const { totalCount, data: movies } = this.getPagedData();
 
     return (
       <div className="row">
-        <nav className="col-md-2 bg-light sidebar">
+        <nav className="col-md-2 bg-dark sidebar p-3">
           <ListGroup
             items={genres}
             currentItem={this.state.currentGenre}
@@ -87,15 +105,17 @@ class Movies extends Component {
           />
         </nav>
         <div className="col">
-          <h2>BlankBuster Movies</h2>
-          <p>Showing {filtered.length} movies currently available for rental</p>
+          <h2>LackLustre Movies</h2>
+          <p>Showing {totalCount} movies currently available for rental</p>
           <MoviesTable
             movies={movies}
+            sortColumn={sortColumn}
             onLike={this.handleLike}
             onDelete={this.handleDelete}
+            onSort={this.handleSort}
           />
           <Pagination
-            itemsCount={filtered.length}
+            itemsCount={totalCount}
             pageSize={pageSize}
             onPageChange={this.handlePageChange}
             currentPage={currentPage}

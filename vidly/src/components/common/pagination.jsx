@@ -2,10 +2,8 @@ import React from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 
-const Pagination = props => {
-  // Destructures variables from props
-  const { itemsCount, pageSize, currentPage, onPageChange } = props;
-
+// Destructures variables from props in the function
+const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
   // Calculates how many pages there should be
   const pagesCount = Math.ceil(itemsCount / pageSize);
   if (pagesCount === 1) return null;
@@ -23,9 +21,9 @@ const Pagination = props => {
                 page === currentPage ? "page-item active" : "page-item"
               }
             >
-              <a className="page-link" onClick={() => onPageChange(page)}>
+              <button className="page-link" onClick={() => onPageChange(page)}>
                 {page}
-              </a>
+              </button>
             </li>
           ))}
         </ul>

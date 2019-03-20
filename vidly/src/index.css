@@ -3,3 +3,19 @@ body {
   padding: 20px 0 0 0;
   font-family: sans-serif;
 }
+
+.container {
+  background-color: whitesmoke;
+}
+
+td {
+  background-color: white;
+}
+
+.list-group a {
+  background-color: white;
+}
+
+.clickable {
+  cursor: pointer;
+}
