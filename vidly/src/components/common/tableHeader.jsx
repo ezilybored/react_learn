@@ -25,11 +25,11 @@ class TableHeader extends Component {
   // Renders the number and headings of th elements dynamically. Maps each column to a new th element
   render() {
     return (
-      <thead>
+      <thead className="tablehead-color">
         <tr>
           {this.props.columns.map(column => (
             <th
-              className="clickable"
+              className="clickable table-heading-text"
               key={column.path || column.key}
               onClick={() => this.raiseSort(column.path)}
             >

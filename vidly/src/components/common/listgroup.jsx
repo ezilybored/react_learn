@@ -11,7 +11,7 @@ const ListGroup = ({
   // textProperty and valueProperty are defined at the end of this component with default properties
 
   return (
-    <ul className="list-group text-center">
+    <ul className="list-group text-center genre-list">
       {items.map(item => (
         <button
           key={item[valueProperty]}

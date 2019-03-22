@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  padding: 20px 0 0 0;
+  padding: 0 0 0 0;
   font-family: sans-serif;
 }
 
@@ -9,13 +9,31 @@ body {
   border: #ffcc00 solid 4px;
   background-color: #1030ad;
   color: #ffcc00;
-  padding: 10px 1px 10px 10px;
+  padding: 10px 10px 10px 10px;
   font-weight: bolder;
   letter-spacing: 0.05em;
 }
 
+.main-nav {
+  background-color: #1030ad;
+}
+
+.main-nav-text,
+.table-heading-text {
+  color: #ffcc00;
+  font-family: "Oswald", sans-serif;
+  font-weight: bolder;
+  font-size: 1.3em;
+  letter-spacing: 0.05em;
+}
+
+.tablehead-color {
+  background-color: #292b2c;
+}
+
 .container {
-  background-color: whitesmoke;
+  background-color: #1030ad;
+  border: black 5px;
 }
 
 td {
@@ -28,4 +46,8 @@ td {
 
 .clickable {
   cursor: pointer;
+}
+
+.genre-list {
+  margin-left: 10%;
 }
