@@ -4,6 +4,16 @@ body {
   font-family: sans-serif;
 }
 
+.LL-title {
+  font-family: "Oswald", sans-serif;
+  border: #ffcc00 solid 4px;
+  background-color: #1030ad;
+  color: #ffcc00;
+  padding: 10px 1px 10px 10px;
+  font-weight: bolder;
+  letter-spacing: 0.05em;
+}
+
 .container {
   background-color: whitesmoke;
 }

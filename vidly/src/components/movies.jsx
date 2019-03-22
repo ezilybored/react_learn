@@ -87,7 +87,7 @@ class Movies extends Component {
         <div className="row">
           <div className="col-2" />
           <div className="col">
-            <h2>LackLustre Movies</h2>
+            <h2 className="LL-title">LACKLUSTRE VIDEO</h2>
             <p>There are no movies currently in the database</p>
           </div>
         </div>
@@ -105,7 +105,7 @@ class Movies extends Component {
           />
         </nav>
         <div className="col">
-          <h2>LackLustre Movies</h2>
+          <h2 className="LL-title">LACKLUSTRE VIDEO</h2>
           <p>Showing {totalCount} movies currently available for rental</p>
           <MoviesTable
             movies={movies}
