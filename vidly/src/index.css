@@ -27,13 +27,20 @@ body {
   letter-spacing: 0.05em;
 }
 
+.main-nav-text:hover {
+  color: #c2a803;
+}
+
 .tablehead-color {
   background-color: #292b2c;
 }
 
 .container {
   background-color: #1030ad;
-  border: black 5px;
+  padding: 2px;
+  width: 100vw;
+  overflow: auto;
+  overflow-y: hidden;
 }
 
 td {
@@ -48,6 +55,18 @@ td {
   cursor: pointer;
 }
 
-.genre-list {
+.login-box {
+  margin: 0 10% 10% 10%;
+  font-family: "Oswald", sans-serif;
+  color: #ffcc00;
+  font-weight: bolder;
+  letter-spacing: 0.05em;
+}
+.login-text {
+  font-family: "Oswald", sans-serif;
+  background-color: #1030ad;
+  color: #ffcc00;
   margin-left: 10%;
+  font-weight: bolder;
+  letter-spacing: 0.05em;
 }
