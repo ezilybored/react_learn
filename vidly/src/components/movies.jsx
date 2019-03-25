@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import { Link } from "react-router-dom";
+import { getGenres } from "../services/fakeGenreService";
+import { paginate } from "../utils/paginate";
 import ListGroup from "./common/listgroup";
 import Pagination from "./common/pagination";
-import { paginate } from "../utils/paginate";
-import { getGenres } from "../services/fakeGenreService";
+import SearchBox from "./common/searchBox";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
 
@@ -50,6 +52,10 @@ class Movies extends Component {
   handleSort = sortColumn => {
     this.setState({ sortColumn: sortColumn });
   };
+
+  handleSearch = query => {
+    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1})
+  }
 
   getPagedData = () => {
     const {
@@ -106,9 +112,14 @@ class Movies extends Component {
           />
         </nav>
         <div className="col">
+          {/* Redirects to the movie form with an ID of new */}
+          <Link to="./movies/new" className="btn btn-primary">
+            Add new movie
+          </Link>
           <p className="table-heading-text">
             Showing {totalCount} movies currently available for rental
           </p>
+          <SearchBox value={searchQuery} onChange={this.handleSearch/>
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}
