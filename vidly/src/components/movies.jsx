@@ -13,9 +13,11 @@ class Movies extends Component {
   state = {
     // Gets the movie list from fakeMovieServices
     movies: [],
-    pageSize: 4,
-    currentPage: 1,
     genres: [],
+    currentPage: 1,
+    pageSize: 4,
+    searchQuery: "",
+    currentGenre: null,
     // Initial sort when the page is loaded
     sortColumn: { path: "title", order: "asc" }
   };
@@ -46,7 +48,7 @@ class Movies extends Component {
 
   handleGenreChange = genre => {
     // Also set the current page to 1 when genre is changed
-    this.setState({ currentGenre: genre, currentPage: 1 });
+    this.setState({ currentGenre: genre, searchQuery: "", currentPage: 1 });
   };
 
   handleSort = sortColumn => {
@@ -54,8 +56,8 @@ class Movies extends Component {
   };
 
   handleSearch = query => {
-    this.setState({ searchQuery: query, selectedGenre: null, currentPage: 1})
-  }
+    this.setState({ searchQuery: query, currentGenre: null, currentPage: 1 });
+  };
 
   getPagedData = () => {
     const {
@@ -63,15 +65,24 @@ class Movies extends Component {
       currentPage,
       movies: allMovies,
       currentGenre,
-      sortColumn
+      sortColumn,
+      searchQuery
     } = this.state;
     // Genre filter needs to be applied before the pagination
     // Is only applied if both currentGenre and curremtGenre._id are both truthy
     // Allows the All Genres button to work
-    const filtered =
-      currentGenre && currentGenre._id
-        ? allMovies.filter(m => m.genre._id === currentGenre._id)
-        : allMovies;
+    let filtered = allMovies;
+    if (searchQuery)
+      filtered = allMovies.filter(m =>
+        m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+      );
+    else if (currentGenre && currentGenre._id)
+      filtered = allMovies.filter(m => m.genre._id === currentGenre._id);
+
+    /*
+      ? allMovies.filter(m => m.genre._id === currentGenre._id)
+      : allMovies;
+      */
 
     // Sorting comes after filtering but before pagination
     // Sorting is done using lodash. Takes two arguments: the (input) filtered array and an array of properties (the column to filter on)
@@ -112,14 +123,17 @@ class Movies extends Component {
           />
         </nav>
         <div className="col">
-          {/* Redirects to the movie form with an ID of new */}
-          <Link to="./movies/new" className="btn btn-primary">
-            Add new movie
-          </Link>
           <p className="table-heading-text">
             Showing {totalCount} movies currently available for rental
           </p>
-          <SearchBox value={searchQuery} onChange={this.handleSearch/>
+          <SearchBox
+            value={this.state.searchQuery}
+            onChange={this.handleSearch}
+          />
+          {/* Redirects to the movie form with an ID of new */}
+          <Link to="./movies/new" className="btn btn-primary mb-3">
+            Add new movie
+          </Link>
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}
