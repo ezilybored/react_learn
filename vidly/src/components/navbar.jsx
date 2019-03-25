@@ -1,13 +1,6 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import {
-  Button,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl
-} from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 
 const NavBar = () => {
   return (
@@ -64,6 +57,9 @@ const NavBar = () => {
           </NavLink>
           <NavLink className="nav-item nav-link" to="/login">
             <p className="main-nav-text">Login</p>
+          </NavLink>
+          <NavLink className="nav-item nav-link" to="/register">
+            <p className="main-nav-text">Register</p>
           </NavLink>
         </Nav>
       </Navbar.Collapse>
