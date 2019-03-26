@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import http from "./services/httpService";
+import { ToastContainer } from "react-toastify";
 import config from "./config.json";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends Component {
@@ -12,6 +14,7 @@ class App extends Component {
   // componentDidMount is a method in the class so async goes at the start
   async componentDidMount() {
     // Use await to wait for response. Object destructure the response and save the data as posts
+    // The address of the api is stored in confic.json and accessed using config.apiEndpoint
     const { data: posts } = await http.get(config.apiEndpoint);
     this.setState({ posts: posts });
   }
@@ -55,7 +58,7 @@ class App extends Component {
     this.setState({ posts });
     try {
       // delete takes takes url (including specific id of the post to delete)
-      await http.delete(config.apiEndpoint + "/" + post.id);
+      await http.delete("s" + config.apiEndpoint + "/" + post.id);
     } catch (ex) {
       /* ex is an object returned from the server. It has 2 properties, request which tells if the 
       request was made and response which gives the http response code */
@@ -69,6 +72,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+        <ToastContainer />
         <button className="btn btn-primary" onClick={this.handleAdd}>
           Add
         </button>

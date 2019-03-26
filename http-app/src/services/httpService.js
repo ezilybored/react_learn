@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 /* This is used for intercepting errors using axios. The first parameter is a success function, 
 the second is an error fu Notification. Here the success function is set to  null */
@@ -12,7 +13,7 @@ axios.interceptors.response.use(null, error => {
   if (!expectedError) {
     // Retrurn the generic error message
     console.log("Logging the error", error);
-    alert("An unexpected error occured");
+    toast.error("An unexpected error occured");
   }
   // Otherwise it is an expected error so send the message to the expected error code in handleDelete()
   return Promise.reject(error);
