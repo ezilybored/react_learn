@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import http from "./services/httpService";
+import logService from "./services/logService";
 import { ToastContainer } from "react-toastify";
 import config from "./config.json";
 import "react-toastify/dist/ReactToastify.css";
