@@ -1,8 +1,8 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import { getGenres } from "../services/fakeGenreService";
-import { getMovie, saveMovie } from "../services/fakeMovieService";
+import { getGenres } from "../services/genreService";
+import { getMovie, saveMovie } from "../services/movieService";
 
 class MovieForm extends Form {
   state = {
@@ -32,19 +32,22 @@ class MovieForm extends Form {
       .label("Rate")
   };
 
-  componentDidMount() {
-    const genres = getGenres();
+  async componentDidMount() {
+    const { data: genres } = await getGenres();
     this.setState({ genres: genres });
 
     // Reads and stores the movie id parameter from the route
     const movieId = this.props.match.params.id;
     if (movieId === "new") return;
 
-    const movie = getMovie(movieId);
-    // If the movie ID is invalid then redirect to /not-found
-    if (!movie) return this.props.history.replace("/not-found");
-
-    this.setState({ data: this.mapToViewModel(movie) });
+    try {
+      const { data: movie } = await getMovie(movieId);
+      this.setState({ data: this.mapToViewModel(movie) });
+    } catch (ex) {
+      // If the movie ID is invalid then redirect to /not-found
+      if (ex.response && ex.response.status === 404)
+        return this.props.history.replace("/not-found");
+    }
   }
 
   // This function maps the data from the server to fit the model required for the current page
@@ -58,11 +61,9 @@ class MovieForm extends Form {
     };
   }
 
-  doSubmit = () => {
+  doSubmit = async () => {
     // Call the server
-    console.log("Submitted");
-
-    saveMovie(this.state.data);
+    await saveMovie(this.state.data);
     // Redirect user to a different page
     this.props.history.push("/movies");
   };
