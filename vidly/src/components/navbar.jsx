@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 
-const NavBar = () => {
+const NavBar = ({ user }) => {
   return (
     // Old style non-React bootstrap version of the navbar
     /*
@@ -55,12 +55,27 @@ const NavBar = () => {
           <NavLink className="nav-item nav-link" to="/rentals">
             <p className="main-nav-text">Rentals</p>
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/login">
-            <p className="main-nav-text">Login</p>
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/register">
-            <p className="main-nav-text">Register</p>
-          </NavLink>
+          {/* Login and register are rendered conditionally */}
+          {!user && (
+            <React.Fragment>
+              <NavLink className="nav-item nav-link" to="/login">
+                <p className="main-nav-text">Login</p>
+              </NavLink>
+              <NavLink className="nav-item nav-link" to="/register">
+                <p className="main-nav-text">Register</p>
+              </NavLink>
+            </React.Fragment>
+          )}
+          {user && (
+            <React.Fragment>
+              <NavLink className="nav-item nav-link" to="/profile">
+                <p className="main-nav-text">{user.name}'s-account</p>
+              </NavLink>
+              <NavLink className="nav-item nav-link" to="/logout">
+                <p className="main-nav-text">Logout</p>
+              </NavLink>
+            </React.Fragment>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
