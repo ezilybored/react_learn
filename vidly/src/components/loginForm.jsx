@@ -24,9 +24,7 @@ class LoginForm extends Form {
     try {
       // Call the server
       const { data } = this.state;
-      const { data: jwt } = await login(data.username, data.password);
-      // Store the JSON webtoken returned from the authorisation server in local storage
-      localStorage.setItem("token", jwt);
+      await login(data.username, data.password);
       // Directs to the home page via a full page reload
       window.location = "/";
     } catch (ex) {
