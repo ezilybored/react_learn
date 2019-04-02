@@ -112,6 +112,8 @@ class Movies extends Component {
     const { length: availableMovies } = this.state.movies;
     // Extracts these values from the state using destructuring
     const { pageSize, currentPage, genres, sortColumn } = this.state;
+    // Extracts the current user from the props
+    const { user } = this.props;
 
     if (availableMovies === 0)
       return (
@@ -144,10 +146,12 @@ class Movies extends Component {
             value={this.state.searchQuery}
             onChange={this.handleSearch}
           />
-          {/* Redirects to the movie form with an ID of new */}
-          <Link to="./movies/new" className="btn btn-primary mb-3">
-            Add new movie
-          </Link>
+          {/* Redirects to the movie form with an ID of new only if there is a user logged in */}
+          {user && (
+            <Link to="./movies/new" className="btn btn-primary mb-3">
+              Add new movie
+            </Link>
+          )}
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}

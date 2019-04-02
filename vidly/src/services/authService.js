@@ -5,6 +5,9 @@ import jwtDecode from "jwt-decode";
 const apiEndpoint = apiUrl + "/auth";
 const tokenKey = "token";
 
+//This function sends the JSON webtoken to the httpService for use in logging the user in
+http.setJwt(getJwt());
+
 export async function login(email, password) {
   const { data: jwt } = await http.post(apiEndpoint, { email, password });
   // Store the JSON webtoken returned from the authorisation server in local storage
@@ -29,9 +32,14 @@ export function getCurrentUser() {
   }
 }
 
+export function getJwt() {
+  return localStorage.getItem(tokenKey);
+}
+
 export default {
   login,
   logout,
   getCurrentUser,
-  loginWithJwt
+  loginWithJwt,
+  getJwt
 };

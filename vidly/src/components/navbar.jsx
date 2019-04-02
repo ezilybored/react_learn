@@ -39,7 +39,7 @@ const NavBar = ({ user }) => {
       </div>
     </nav>
     */
-    <Navbar expand="lg">
+    <Navbar className="main-nav" expand="lg">
       <Navbar.Brand href="/">
         <h2 className="LL-title">LACKLUSTRE VIDEO</h2>
       </Navbar.Brand>

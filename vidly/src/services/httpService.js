@@ -21,9 +21,17 @@ axios.interceptors.response.use(null, error => {
   return Promise.reject(error);
 });
 
+function setJwt(jwt) {
+  // Sets headers on all http requests.
+  //Here we are setting the JSON web token as a header
+  // This function is made available for use by authServices which can then supply the jwt
+  axios.defaults.headers.common["x-auth-token"] = jwt;
+}
+
 export default {
   get: axios.get,
   post: axios.post,
   put: axios.put,
-  delete: axios.delete
+  delete: axios.delete,
+  setJwt
 };

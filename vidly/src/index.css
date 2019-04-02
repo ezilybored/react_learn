@@ -1,7 +1,11 @@
+html,
 body {
   margin: 0;
   padding: 0 0 0 0;
   font-family: sans-serif;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
 }
 
 .LL-title {
@@ -35,12 +39,25 @@ body {
   background-color: #292b2c;
 }
 
-.container {
+.container2 {
   background-color: #1030ad;
-  padding: 2px;
+
   width: 100vw;
+  height: 100vh;
   overflow: auto;
   overflow-y: hidden;
+  margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .container2 {
+    height: auto;
+    padding: 5%;
+  }
+
+  .sidebar {
+    display: none;
+  }
 }
 
 td {
