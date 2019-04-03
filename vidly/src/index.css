@@ -1,5 +1,6 @@
 html,
-body {
+body,
+#root {
   margin: 0;
   padding: 0 0 0 0;
   font-family: sans-serif;
@@ -15,11 +16,14 @@ body {
   color: #ffcc00;
   padding: 10px 10px 10px 10px;
   font-weight: bolder;
-  letter-spacing: 0.05em;
+  font-size: 3rem;
+  letter-spacing: 0.225rem;
 }
 
 .main-nav {
+  box-sizing: border-box;
   background-color: #1030ad;
+  padding: 1rem 0rem 0rem 0rem !important;
 }
 
 .main-nav-text,
@@ -27,8 +31,8 @@ body {
   color: #ffcc00;
   font-family: "Oswald", sans-serif;
   font-weight: bolder;
-  font-size: 1.3em;
-  letter-spacing: 0.05em;
+  font-size: 2rem;
+  letter-spacing: 0.15rem;
 }
 
 .main-nav-text:hover {
@@ -37,31 +41,37 @@ body {
 
 .tablehead-color {
   background-color: #292b2c;
+  color: #ffcc00;
+  font-family: "Oswald", sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.125rem;
 }
 
 .container2 {
   background-color: #1030ad;
-
-  width: 100vw;
-  height: 100vh;
+  width: inherit;
+  height: inherit;
   overflow: auto;
   overflow-y: hidden;
   margin: 0;
+  padding: 0 1rem 0 1rem;
 }
 
-@media only screen and (max-width: 600px) {
-  .container2 {
-    height: auto;
-    padding: 5%;
-  }
-
-  .sidebar {
-    display: none;
-  }
+.admin {
 }
 
 td {
   background-color: white;
+}
+
+td,
+.list-group,
+.deletebutton,
+.search,
+.movieForm {
+  font-size: 1.2rem;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.09rem;
 }
 
 .list-group a {
@@ -86,4 +96,41 @@ td {
   margin-left: 10%;
   font-weight: bolder;
   letter-spacing: 0.05em;
+}
+
+@media only screen and (max-width: 600px) {
+  .container2 {
+    max-height: 100%;
+  }
+  .sidebar {
+    display: none;
+  }
+  .LL-title {
+    font-size: 1.5rem;
+    letter-spacing: 0.113rem;
+  }
+  .main-nav-text,
+  .table-heading-text {
+    font-weight: bolder;
+    font-size: 1rem;
+    letter-spacing: 0.075rem;
+  }
+  .tablehead-color {
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+  }
+  td,
+  .list-group,
+  .deletebutton,
+  .search,
+  .movieForm {
+    font-size: 0.9rem;
+    letter-spacing: 0.09rem;
+  }
+  .admin > tr > td:last-child {
+    display: none;
+  }
+  .admin > tr > th:last-child {
+    display: none;
+  }
 }

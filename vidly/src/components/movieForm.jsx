@@ -2,6 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import { getGenres } from "../services/genreService";
+import auth from "../services/authService";
 import { getMovie, saveMovie } from "../services/movieService";
 
 class MovieForm extends Form {
@@ -75,15 +76,19 @@ class MovieForm extends Form {
   };
 
   render() {
+    var title = "Movie info";
+    const user = auth.getCurrentUser();
+    const movieId = this.props.match.params.id;
+    if (movieId === "new") title = "Add new movie";
     return (
-      <div>
-        <h1 className="login-text">Add new movie</h1>
+      <div className="movieForm">
+        <h1 className="login-text">{title}</h1>
         <form className="login-box" onSubmit={this.handleSubmit}>
           {this.renderInput("title", "Title")}
           {this.renderSelect("genreId", "Genre", this.state.genres)}
           {this.renderInput("numberInStock", "Number in stock", "number")}
           {this.renderInput("dailyRentalRate", "Rate")}
-          {this.renderButton("Save")}
+          {user && user.isAdmin && this.renderButton("Save")}
         </form>
       </div>
     );

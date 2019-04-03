@@ -1,8 +1,12 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import LinkContainer from "react-router-bootstrap/lib/LinkContainer";
+import auth from "../services/authService";
 
 const NavBar = ({ user }) => {
+  const adminCheck = auth.getCurrentUser();
   return (
     // Old style non-React bootstrap version of the navbar
     /*
@@ -39,22 +43,26 @@ const NavBar = ({ user }) => {
       </div>
     </nav>
     */
-    <Navbar className="main-nav" expand="lg">
+    <Navbar collapseOnSelect="true" className="main-nav" expand="lg">
       <Navbar.Brand href="/">
         <h2 className="LL-title">LACKLUSTRE VIDEO</h2>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
+      <Navbar.Collapse id="basic-navbar-nav" autoCollapse>
         <Nav className="ml-auto main-nav">
           <NavLink className="nav-item nav-link" to="/movies">
             <p className="main-nav-text">Movies</p>
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/customers">
-            <p className="main-nav-text">Customers</p>
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/rentals">
-            <p className="main-nav-text">Rentals</p>
-          </NavLink>
+          {user && adminCheck.isAdmin && (
+            <NavLink className="nav-item nav-link" to="/customers">
+              <p className="main-nav-text">Customers</p>
+            </NavLink>
+          )}
+          {user && adminCheck.isAdmin && (
+            <NavLink className="nav-item nav-link" to="/rentals">
+              <p className="main-nav-text">Rentals</p>
+            </NavLink>
+          )}
           {/* Login and register are rendered conditionally */}
           {!user && (
             <React.Fragment>

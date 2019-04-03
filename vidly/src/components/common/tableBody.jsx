@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import auth from "../../services/authService";
 import _ from "lodash";
 
 // Creating a reusable table hbody component that can take any amount of data
@@ -22,8 +23,14 @@ class TableBody extends Component {
 
   render() {
     const { data, columns } = this.props;
+    const user = auth.getCurrentUser();
+    let classes = "tabletext";
+    if (user && user.isAdmin) {
+      classes = classes + " admin";
+      console.log(classes);
+    }
     return (
-      <tbody>
+      <tbody className={classes}>
         {/* Dynamically rendering the table using the data and columns props passed in */}
         {data.map(item => (
           <tr key={item._id}>

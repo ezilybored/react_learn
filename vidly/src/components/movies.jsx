@@ -142,16 +142,22 @@ class Movies extends Component {
           <p className="table-heading-text">
             Showing {totalCount} movies currently available for rental
           </p>
-          <SearchBox
-            value={this.state.searchQuery}
-            onChange={this.handleSearch}
-          />
-          {/* Redirects to the movie form with an ID of new only if there is a user logged in */}
-          {user && (
-            <Link to="./movies/new" className="btn btn-primary mb-3">
-              Add new movie
-            </Link>
-          )}
+          <div className="row">
+            <div className="col-6  mb-3 search">
+              <SearchBox
+                value={this.state.searchQuery}
+                onChange={this.handleSearch}
+              />
+            </div>
+            <div className="col-6">
+              {/* Redirects to the movie form with an ID of new only if there is a user logged in */}
+              {user && user.isAdmin && (
+                <Link to="./movies/new" className="btn btn-primary mb-3">
+                  Add new movie
+                </Link>
+              )}
+            </div>
+          </div>
           <MoviesTable
             movies={movies}
             sortColumn={sortColumn}

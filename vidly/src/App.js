@@ -9,6 +9,7 @@ import NotFound from "./components/notFound";
 import MovieForm from "./components/movieForm";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
+import ProtectedRoute from "./components/common/protectedRoute";
 import Logout from "./components/logout";
 import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
@@ -26,20 +27,22 @@ class App extends Component {
     return (
       <React.Fragment>
         <ToastContainer />
-        <NavBar user={user} />
         <main className="container2">
+          <NavBar user={user} />
           <Switch>
             <Route path="/logout" component={Logout} />
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={RegisterForm} />
-            {/* Protects the route from being accessed by simpky typing in the url */}
-            <Route
+            {/* Protects the route from being accessed by simply typing in the url */}
+            {/* Updated to include the ProtectedRoute reusable component */}
+            {/* {<Route
               path="/movies/:id"
               render={props => {
                 if (!user) return <Redirect to="/login" />;
                 return <MovieForm {...props} />;
               }}
-            />
+            />} */}
+            <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route
               path="/movies/"
               render={props => <Movies {...props} user={user} />}
