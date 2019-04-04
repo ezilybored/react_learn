@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import auth from "../../services/authService";
 
 // Creating a reusable table header component that can take any number or title columns
 // Needs to take in an array of columns, sortColumn and onSort()
@@ -25,14 +24,8 @@ class TableHeader extends Component {
 
   // Renders the number and headings of th elements dynamically. Maps each column to a new th element
   render() {
-    const user = auth.getCurrentUser();
-    let classes = "tablehead-color";
-    if (user && user.isAdmin) {
-      classes = classes + " admin";
-      console.log(classes);
-    }
     return (
-      <thead className={classes}>
+      <thead className="tablehead">
         <tr>
           {this.props.columns.map(column => (
             <th

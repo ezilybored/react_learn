@@ -22,7 +22,7 @@ class MoviesTable extends Component {
     key: "delete",
     content: movie => (
       <button
-        className="btn btn-danger btn-sm deletebutton"
+        className="btn btn-danger btn-md deletebutton"
         onClick={() => this.props.onDelete(movie)}
       >
         Delete
@@ -46,14 +46,22 @@ class MoviesTable extends Component {
 
   render() {
     const { movies, sortColumn, onSort } = this.props;
+    const user = auth.getCurrentUser();
+    let classes = "tabletext";
+    if (user && user.isAdmin) {
+      classes = classes + " admin";
+      console.log(classes);
+    }
 
     return (
-      <Table
-        data={movies}
-        sortColumn={sortColumn}
-        onSort={onSort}
-        columns={this.columns}
-      />
+      <div className={classes}>
+        <Table
+          data={movies}
+          sortColumn={sortColumn}
+          onSort={onSort}
+          columns={this.columns}
+        />
+      </div>
     );
   }
 }

@@ -5,7 +5,7 @@ import TableHeader from "./tableHeader";
 // Can destructure the props variable within the function. Neat
 const Table = ({ columns, sortColumn, onSort, data }) => {
   return (
-    <table className="table table-bordered text-center mr-2">
+    <table className="table table-bordered text-center table-responsive-sm">
       <TableHeader columns={columns} sortColumn={sortColumn} onSort={onSort} />
       <TableBody data={data} columns={columns} />
     </table>

@@ -48,7 +48,7 @@ const NavBar = ({ user }) => {
         <h2 className="LL-title">LACKLUSTRE VIDEO</h2>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav" autoCollapse>
+      <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto main-nav">
           <NavLink className="nav-item nav-link" to="/movies">
             <p className="main-nav-text">Movies</p>
