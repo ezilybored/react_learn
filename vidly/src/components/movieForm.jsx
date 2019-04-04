@@ -1,6 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
+import { Link } from "react-router-dom";
 import { getGenres } from "../services/genreService";
 import auth from "../services/authService";
 import { getMovie, saveMovie } from "../services/movieService";
@@ -89,6 +90,9 @@ class MovieForm extends Form {
           {this.renderInput("numberInStock", "Number in stock", "number")}
           {this.renderInput("dailyRentalRate", "Rate")}
           {user && user.isAdmin && this.renderButton("Save")}
+          <Link to="../movies" className="btn btn-primary">
+            Back
+          </Link>
         </form>
       </div>
     );

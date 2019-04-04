@@ -124,10 +124,10 @@ td,
     font-size: 0.9rem;
     letter-spacing: 0.09rem;
   }
-  .admin > table > .tablebody > tr > td:last-child {
+  .admin > table > .tablebody > tr > td:nth-child(2) {
     display: none;
   }
-  .admin > table > .tablehead > tr > th:last-child {
+  .admin > table > .tablehead > tr > th:nth-child(2) {
     display: none;
   }
 }

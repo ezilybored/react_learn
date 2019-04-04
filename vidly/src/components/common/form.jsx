@@ -6,7 +6,8 @@ import Select from "./select";
 class Form extends Component {
   state = {
     data: {},
-    errors: {}
+    errors: {},
+    pressed: ""
   };
 
   // The basic form validation function
@@ -50,12 +51,14 @@ class Form extends Component {
     // If there are errors then don't call the server
     if (errors) return;
 
+    console.log(this.state.data);
+    console.log(this.state.errors);
     this.doSubmit();
   };
 
   renderButton(label) {
     return (
-      <button disabled={this.validate()} className="btn btn-primary">
+      <button disabled={this.validate()} className="btn btn-primary mr-2">
         {label}
       </button>
     );
