@@ -2,6 +2,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import logService from "./logService";
 
+// This replaces the use of config.json that was used when developing this application
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
 /* This is used for intercepting errors using axios. The first parameter is a success function, 
 the second is an error function. Here the success function is set to  null */
 axios.interceptors.response.use(null, error => {
